@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio de Multiplicação</title>
+
+    <!-- Inclusão do Bootstrap e style.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- CDN do Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Desafio de Multiplicação</h1>
+
+        {% if mensagem %}
+        <div class="custom-alert alert {% if 'correta' in mensagem %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show" role="alert">
+            {% if 'correta' in mensagem %}
+                <i class="bi bi-check-circle-fill"></i> <!-- Ícone de correto -->
+            {% else %}
+                <i class="bi bi-x-circle-fill"></i> <!-- Ícone de erro -->
+            {% endif %}
+            {{ mensagem }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <div class="text-center">
+            <p><strong>Qual é o resultado de:</strong></p>
+            <h2>{{ num1 }} x {{ num2 }} = ?</h2>
+
+            <!-- Formulário para resposta do usuário -->
+            <form method="POST" class="form-inline justify-content-center">
+                <input type="hidden" name="num1" value="{{ num1 }}">
+                <input type="hidden" name="num2" value="{{ num2 }}">
+                <input type="hidden" name="resposta_correta" value="{{ resposta_correta }}">
+
+                <div class="form-group">
+                    <input type="number" name="resposta" class="form-control" placeholder="Sua resposta" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary ml-2">Verificar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Inclusão do Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
